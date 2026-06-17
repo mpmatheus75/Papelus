@@ -17,7 +17,6 @@ export default function Estoque({ produtos, onDeletar }) {
 
   return (
     <div>
-
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '12px', marginBottom: '20px' }}>
         {[
           { label: 'Produtos', valor: totalProdutos, cor: '#6366f1' },
@@ -38,47 +37,38 @@ export default function Estoque({ produtos, onDeletar }) {
         </div>
       )}
 
-      <div style={{ background: 'white', borderRadius: '12px', padding: '20px', boxShadow: '0 1px 4px rgba(0,0,0,0.08)' }}>
+      <div style={{ background: 'white', borderRadius: '12px', padding: '16px', boxShadow: '0 1px 4px rgba(0,0,0,0.08)' }}>
         <h2 style={{ fontSize: '16px', fontWeight: '600', marginBottom: '16px' }}>Produtos em estoque</h2>
 
         {produtos.length === 0 ? (
           <p style={{ textAlign: 'center', color: '#aaa', padding: '32px' }}>Nenhum produto cadastrado ainda.</p>
         ) : (
-          <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: '14px' }}>
-            <thead>
-              <tr style={{ borderBottom: '1px solid #f0f0f0' }}>
-                {['Produto', 'Categoria', 'Preço', 'Qtd.', 'Status', ''].map(col => (
-                  <th key={col} style={{ textAlign: 'left', padding: '8px 12px', fontSize: '12px', color: '#888', fontWeight: '500' }}>{col}</th>
-                ))}
-              </tr>
-            </thead>
-            <tbody>
-              {produtos.map(produto => {
-                const status = getStatus(produto)
-                return (
-                  <tr key={produto.id} style={{ borderBottom: '1px solid #f9f9f9' }}>
-                    <td style={{ padding: '12px' }}>{produto.nome}</td>
-                    <td style={{ padding: '12px', color: '#666' }}>{produto.categoria}</td>
-                    <td style={{ padding: '12px' }}>{fmtPreco(produto.preco)}</td>
-                    <td style={{ padding: '12px', fontWeight: '600' }}>{produto.quantidade}</td>
-                    <td style={{ padding: '12px' }}>
-                      <span style={{ background: status.cor, color: status.texto, padding: '3px 10px', borderRadius: '999px', fontSize: '12px', fontWeight: '500' }}>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
+            {produtos.map(produto => {
+              const status = getStatus(produto)
+              return (
+                <div key={produto.id} style={{ border: '1px solid #f0f0f0', borderRadius: '10px', padding: '14px', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                  <div style={{ flex: 1 }}>
+                    <div style={{ fontWeight: '600', fontSize: '14px', marginBottom: '4px' }}>{produto.nome}</div>
+                    <div style={{ fontSize: '12px', color: '#888', marginBottom: '6px' }}>{produto.categoria}</div>
+                    <div style={{ display: 'flex', gap: '10px', alignItems: 'center', flexWrap: 'wrap' }}>
+                      <span style={{ fontSize: '14px', fontWeight: '500' }}>{fmtPreco(produto.preco)}</span>
+                      <span style={{ fontSize: '13px', color: '#555' }}>Qtd: <strong>{produto.quantidade}</strong></span>
+                      <span style={{ background: status.cor, color: status.texto, padding: '2px 8px', borderRadius: '999px', fontSize: '11px', fontWeight: '500' }}>
                         {status.label}
                       </span>
-                    </td>
-                    <td style={{ padding: '12px' }}>
-                      <button
-                        onClick={() => onDeletar(produto.id)}
-                        style={{ background: 'none', border: 'none', color: '#ef4444', fontSize: '16px', cursor: 'pointer' }}
-                      >
-                        🗑️
-                      </button>
-                    </td>
-                  </tr>
-                )
-              })}
-            </tbody>
-          </table>
+                    </div>
+                  </div>
+                  <button
+                    onClick={() => onDeletar(produto.id)}
+                    style={{ background: 'none', border: 'none', color: '#ef4444', fontSize: '18px', cursor: 'pointer', marginLeft: '12px' }}
+                  >
+                    🗑️
+                  </button>
+                </div>
+              )
+            })}
+          </div>
         )}
       </div>
     </div>

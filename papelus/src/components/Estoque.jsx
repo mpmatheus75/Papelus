@@ -18,7 +18,7 @@ export default function Estoque({ produtos, onDeletar }) {
   return (
     <div>
 
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '12px', marginBottom: '20px' }}>
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '12px', marginBottom: '20px' }}>
         {[
           { label: 'Produtos', valor: totalProdutos, cor: '#6366f1' },
           { label: 'Itens em estoque', valor: totalItens, cor: '#10b981' },

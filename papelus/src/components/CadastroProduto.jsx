@@ -43,7 +43,7 @@ export default function CadastroProduto({ onSalvar }) {
     <div style={{ background: 'white', borderRadius: '12px', padding: '24px', boxShadow: '0 1px 4px rgba(0,0,0,0.08)' }}>
       <h2 style={{ fontSize: '16px', fontWeight: '600', marginBottom: '20px' }}>Novo Produto</h2>
 
-      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '16px' }}>
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', gap: '16px' }}>
 
         <div>
           <label style={{ fontSize: '13px', color: '#666', display: 'block', marginBottom: '6px' }}>Nome do produto</label>

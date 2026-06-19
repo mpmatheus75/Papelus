@@ -15,6 +15,7 @@ export default function CadastroProduto({ onSalvar }) {
     nome: '',
     categoria: 'Cadernos',
     preco: '',
+    custo: '',
     quantidade: '',
     minimo: '5',
   })
@@ -31,6 +32,7 @@ export default function CadastroProduto({ onSalvar }) {
       nome: form.nome,
       categoria: form.categoria,
       preco: parseFloat(form.preco),
+      custo: parseFloat(form.custo) || 0,
       quantidade: parseInt(form.quantidade) || 0,
       minimo: parseInt(form.minimo) || 5,
     })
@@ -71,6 +73,11 @@ export default function CadastroProduto({ onSalvar }) {
           <label style={{ fontSize: '13px', color: '#666', display: 'block', marginBottom: '6px' }}>Estoque mínimo (alerta)</label>
           <input name="minimo" type="number" value={form.minimo} onChange={handleChange} placeholder="5" min="0" />
         </div>
+
+        <div>
+        <label style={{ fontSize: '13px', color: '#666', display: 'block', marginBottom: '6px' }}>Preço de custo (R$)</label>
+        <input name="custo" type="number" value={form.custo} onChange={handleChange} placeholder="0,00" min="0" step="0.01" />
+       </div>
 
       </div>
 

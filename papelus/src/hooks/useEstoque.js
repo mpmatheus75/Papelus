@@ -2,9 +2,9 @@ import { useStat, useState } from 'react'
 
 const DADOS_INICIAIS = {
     produtos: [
-    { id: 1, nome: 'Caderno espiral 96fls', categoria: 'Cadernos', preco: 18.90, quantidade: 12, minimo: 5 },
-    { id: 2, nome: 'Caneta esferográfica azul', categoria: 'Canetas e lápis', preco: 2.50, quantidade: 3, minimo: 10 },
-    { id: 3, nome: 'Washi tape floral', categoria: 'Adesivos', preco: 9.90, quantidade: 8, minimo: 4 },
+    { id: 1, nome: 'Caderno Inteligente BySophie', categoria: 'Caderno', preco: 90.99, custo: 52.90, quantidade: 1, minimo: 1 },
+    { id: 2, nome: 'Caderno Inteligente Mini Verde ', categoria: 'Caderno', preco: 69.90, custo: 39.90, quantidade: 1, minimo: 1 },
+    { id: 3, nome: 'Caderno Inteligente Mini Grey Love', categoria: 'Caderno', preco: 69.90, quantidade: 1, custo: 39.90, minimo: 1 },
   ],
   vendas: [],
   proximoId: 4
@@ -47,19 +47,28 @@ export function useEstoque() {
         })
     }
 
+    function editarProduto(produtoAtualizado) {
+  atualizar({
+    ...dados,
+    produtos: dados.produtos.map(p => 
+      p.id === produtoAtualizado.id ? produtoAtualizado : p
+    )
+        })
+    }
+
     function registrarVenda(venda) {
-        const produtosAtualizados = dados.produtos.map(p=> {
-            const item = venda.itens.find(i => i.produtoID === p.id)
+        const produtosAtualizados = dados.produtos.map(p => {
+            const item = venda.itens.find(i => i.produtoId === p.id)
             if (item) return {...p, quantidade: p.quantidade - item.quantidade}
             return p
         })
         atualizar({
             ...dados,
             produtos: produtosAtualizados,
-            vendas: [vendas, ...dados.vendas]
+            vendas: [venda, ...dados.vendas]
         })
 
     }
 
-    return{dados, adicionarProdutos, deletarProduto, registrarVenda }
+    return{dados, adicionarProdutos, deletarProduto, registrarVenda, editarProduto }
 }

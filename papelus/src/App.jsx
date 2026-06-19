@@ -14,7 +14,7 @@ const abas = [
 
 export default function App() {
   const [abaAtiva, setAbaAtiva] = useState('estoque')
-  const { dados, adicionarProduto, deletarProduto, registrarVenda } = useEstoque()
+  const { dados, adicionarProduto, deletarProduto, registrarVenda, editarProduto } = useEstoque()
 
   return (
     <div style={{ maxWidth: '900px', margin: '0 auto', padding: '24px 16px' }}>
@@ -45,7 +45,7 @@ export default function App() {
       </nav>
 
       {abaAtiva === 'estoque' && (
-        <Estoque produtos={dados.produtos} onDeletar={deletarProduto} />
+       <Estoque produtos={dados.produtos} onDeletar={deletarProduto} onEditar={editarProduto} />
       )}
       {abaAtiva === 'venda' && (
         <NovaVenda produtos={dados.produtos} onVenda={registrarVenda} />
